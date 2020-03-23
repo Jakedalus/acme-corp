@@ -24,8 +24,22 @@ const HeroWrapper = styled.section`
     padding: 100px 200px;
     border-radius: 10px;
 
+    animation: .8s ease-in-out .2s fadeInMoveUp backwards;
+
     h1 {
       font-size: 60px;
+    }
+  }
+
+  @keyframes fadeInMoveUp {
+    0% {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 `;

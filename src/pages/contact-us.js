@@ -25,7 +25,8 @@ export const query = graphql`
 
 const Form = styled.form`
   padding: 10px;
-  background: #eee;
+  background: var(--light_gray);
+  border-radius: 10px;
   margin-top: 20px;
   max-width: 800px;
   margin-left: auto;
@@ -37,6 +38,7 @@ const Form = styled.form`
     height: 40px;
     border: 1px solid #eee;
     width: 100%;
+    padding: 5px;
   }
 
   textarea {
@@ -46,17 +48,30 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  background: orange;
+  background: var(--dark_red);
   color: white;
   cursor: pointer;
   padding: 4px 8px;
   box-shadow: none;
+  border: none;
   border-radius: 4px;
+
+  &:hover {
+    color: var(--yellow);
+  }
 `;
 
 const ContentWrapper = styled.section`
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
+  background: var(--dark_blue);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+
+  a {
+    color: var(--yellow);
+  }
 `;
 
 const ContactUs = (props) => {

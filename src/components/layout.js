@@ -65,15 +65,28 @@ const Header = styled.header`
   height: 66px;
   padding: 0 16px;
   box-sizing: border-box;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const NavLinks = styled.div`
   margin-left: auto;
   display: flex;
+  animation: .8s ease-in-out fadeIn;
 `;
 
 const Branding = styled.div`
   margin: auto 0;
+
+  animation: .8s ease-in-out fadeIn;
 
   a {
     color: white;

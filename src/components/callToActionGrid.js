@@ -5,7 +5,7 @@ import CallToActionBlock from './callToActionBlock';
 
 const CallToActionGridWrapper = styled.section`
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
 `;
 
 const CallToActionGrid = ({title, callToActions}) => {

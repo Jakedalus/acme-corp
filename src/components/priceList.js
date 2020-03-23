@@ -5,7 +5,7 @@ import PriceItem from './priceItem';
 
 const PriceListWrapper = styled.section`
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto;
 
   >div:last-child {
     display: flex;
