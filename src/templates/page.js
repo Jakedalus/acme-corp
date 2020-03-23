@@ -47,8 +47,11 @@ query PageQuery($id: String){
 
 const PageWrapper = styled.section`
   max-width: 800px;
-  margin: 0 auto;
-
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--dark_blue);
+  color: white;
+  border-radius: 10px;
 `;
 
 const Page = props => {
