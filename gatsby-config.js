@@ -9,7 +9,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic-graphql',
       options: {
-        repositoryName: 'jakedalus-bep-landing',
+        repositoryName: 'jakedalus-acme-corp',
         pages: [{
           type: 'Page',
           match: '/:uid',
