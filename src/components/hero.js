@@ -5,8 +5,10 @@ import styled from 'styled-components';
 const HeroWrapper = styled.section`
   background: url('${props => props.backgroundImage}');
   // background: var(--light_gray);
-  background-size: cover;
+  background-size: 100%;
+  background-origin: border-box;
   background-position: center;
+  // background-position-x: 1px;
   background-repeat: no-repeat;
   height: calc(100vh - 66px);
   display: flex;
@@ -19,7 +21,8 @@ const HeroWrapper = styled.section`
     max-width: 800px;
     margin: 0 auto;
     // background: rgba(0,0,0,0.5);
-    padding: 10px;
+    padding: 100px 200px;
+    border-radius: 10px;
 
     h1 {
       font-size: 60px;
