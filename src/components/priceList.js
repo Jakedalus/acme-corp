@@ -14,6 +14,7 @@ const PriceListWrapper = styled.section`
 `;
 
 const PriceList = ({title, prices}) => {
+  console.log(prices);
   return (
     <PriceListWrapper>
       <RichText render={title} />
@@ -24,7 +25,7 @@ const PriceList = ({title, prices}) => {
             title={price.price_list_title}
             description={price.price_list_description}
             price={price.price_per_month}
-            mostPopular={price.price_type === 'Most popular'}
+            mostPopular={price.price_type === 'Most Popular'}
           />
         ))}
       </div>
