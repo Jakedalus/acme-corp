@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Rubik:400,400i,700,700i&display=swap');
 :root {
-  --light_purple: #9d8cea;
-  --dark_green: #326273;
-  --dark_purple: #36213e;
-  --blue: #85c0ea;
-  --off_white: #fcf7ff;
+  --yellow: #f3f998;
+  --bright_red: #e81e1e;
+  --dark_red: #7d110f;
+  --dark_blue: #15152d;
+  --light_gray: #a89da3;
   /* Pallete designed using coolors.co */
 }
 
@@ -12,7 +12,7 @@ html {
   font-family: 'Karla', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background: var(--off_white);
+  background: var(--light_gray);
 }
 body {
   margin: 0;

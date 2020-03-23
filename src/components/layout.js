@@ -54,14 +54,14 @@ const NavLink = styled.div`
     font-size: 16px;
 
     &:hover {
-      color: var(--light_purple);
+      color: var(--yellow);
     }
   }
 `;
 
 const Header = styled.header`
   display: flex;
-  background: var(--dark_purple);
+  background: var(--dark_blue);
   height: 66px;
   padding: 0 16px;
   box-sizing: border-box;
@@ -82,7 +82,7 @@ const Branding = styled.div`
     text-decoration: none;
 
     &:hover {
-      color: var(--light_purple);
+      color: var(--yellow);
     }
   }
 `;
