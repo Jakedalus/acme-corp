@@ -14,7 +14,7 @@ const SliceZone = ({body}) => {
               key={i}
               title={bodyContent.primary.hero_title}
               content={bodyContent.primary.hero_content}
-              backgroundImage={bodyContent.primary.background_image.url}
+              backgroundImage={bodyContent.primary.background_image ? bodyContent.primary.background_image.url : ''}
             />
             )
         } else if (bodyContent.type === 'call_to_action_grid') {

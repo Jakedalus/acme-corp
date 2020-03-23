@@ -5,7 +5,8 @@ import {Link} from 'gatsby';
 
 const CallToActionBlockWrapper = styled.section`
   padding: 20px;
-  background: #eee;
+  background: var(--blue);
+
   border-radius: 20px;
   margin: 20px 0;
 
@@ -14,13 +15,14 @@ const CallToActionBlockWrapper = styled.section`
 
     .featured-image-wrapper {
       margin: auto 10px;
+      margin-left: auto;
       background: white;
       padding: 10px;
       border-radius: 10px;
     }
 
     img {
-      max-width: 150px;
+      max-width: 250px;
       margin: 0;
     }
   }

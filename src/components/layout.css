@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Rubik:400,400i,700,700i&display=swap');
+:root {
+  --light_purple: #9d8cea;
+  --dark_green: #326273;
+  --dark_purple: #36213e;
+  --blue: #85c0ea;
+  --off_white: #fcf7ff;
+  /* Pallete designed using coolors.co */
+}
+
 html {
   font-family: 'Karla', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background: var(--off_white);
 }
 body {
   margin: 0;
