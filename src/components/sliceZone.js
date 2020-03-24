@@ -2,6 +2,9 @@ import React from 'react';
 import Hero from './hero';
 import CallToActionGrid from './callToActionGrid';
 import PriceList from './priceList';
+import PostText from './postText';
+import PostQuote from './postQuote';
+import ImageWithCaption from './imageWithCaption';
 
 const SliceZone = ({body}) => {
   console.log(body);
@@ -31,6 +34,30 @@ const SliceZone = ({body}) => {
               key={i}
               title={bodyContent.primary.title}
               prices={bodyContent.fields}
+            />
+          );
+        } else if (bodyContent.type === 'text') {
+          return (
+            <PostText
+              key={i}
+              // title={bodyContent.primary.title}
+              text={bodyContent.primary.post_text}
+            />
+          );
+        } else if (bodyContent.type === 'image_with_caption') {
+          return (
+            <ImageWithCaption
+              key={i}
+              image={bodyContent.primary.image}
+              imageCaption={bodyContent.primary.image_caption}
+            />
+          );
+        } else if (bodyContent.type === 'quote') {
+          return (
+            <PostQuote
+              key={i}
+              // title={bodyContent.primary.title}
+              quote={bodyContent.primary.post_quote}
             />
           );
         } else {
