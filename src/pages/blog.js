@@ -1,7 +1,7 @@
 import React from 'react';
 import {graphql} from 'gatsby';
 import Layout from '../components/layout';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import RichText from '../components/richText';
 import BlogPost from '../components/blogPost';
 
@@ -51,6 +51,57 @@ export const query = graphql`
   }
 }`;
 
+const ContentWrapper = styled.section`
+  max-width: 800px;
+  margin: 40px auto;
+  background: #e9eef0;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+
+  a {
+    color: var(--yellow);
+  }
+`;
+
+const BlogWrapper = styled.section`
+  // background: var(--light_gray);
+  // background: #e9eef0;
+  // position: relative;
+  
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // text-align: center;
+  // color: var(--dark_red);
+  // color: var(--yellow);
+
+  .blog-header {
+    background: url('${props => props.backgroundImage}');
+    background-size: 100%;
+    background-origin: border-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(60vh - 66px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    .blog-header-content {
+      width: 820px;
+      padding: 20px;
+    }
+  }
+
+  img {
+    height: 50vh;
+  }
+
+`;
+
 const Blog = props => {
 
   console.log(props);
@@ -58,25 +109,30 @@ const Blog = props => {
 
   return (
     <Layout>
-      <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_title} />
-      <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_description} />
-      <img 
-        src={props.data.prismic.allBlog_homes.edges[0].node.blog_home_image.url} 
-        alt="Blog Home"
-      />
-      {
-        props.data.prismic.allBlog_posts.edges.map((blog, i) => {
-          console.log('current blog:', blog);
-          return (
-          <BlogPost 
-            key={i}
-            title={blog.node.blog_post_title}
-            body={blog.node.body}
-            // price={price.price_per_month}
-            // mostPopular={price.price_type === 'Most Popular'}
-          />
-        )})
-      }
+      <BlogWrapper
+        backgroundImage={props.data.prismic.allBlog_homes.edges[0].node.blog_home_image.url}
+      >
+        <div className="blog-header">
+          <div className="blog-header-content">
+            <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_title} />
+            <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_description} />
+          </div>
+        </div>
+        {
+          props.data.prismic.allBlog_posts.edges.map((blog, i) => {
+            console.log('current blog:', blog);
+            return (
+            <BlogPost 
+              key={i}
+              title={blog.node.blog_post_title}
+              body={blog.node.body}
+              date={blog.node.date}
+              // price={price.price_per_month}
+              // mostPopular={price.price_type === 'Most Popular'}
+            />
+          )})
+        }
+      </BlogWrapper>
     </Layout>
   );
 

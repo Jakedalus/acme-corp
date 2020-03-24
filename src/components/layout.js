@@ -80,13 +80,13 @@ const Header = styled.header`
 const NavLinks = styled.div`
   margin-left: auto;
   display: flex;
-  animation: .8s ease-in-out fadeIn;
+  // animation: .8s ease-in-out fadeIn;
 `;
 
 const Branding = styled.div`
   margin: auto 0;
 
-  animation: .8s ease-in-out fadeIn;
+  // animation: .8s ease-in-out fadeIn;
 
   a {
     color: white;

@@ -1,22 +1,33 @@
 import React from 'react';
 import RichText from './richText';
 import SliceZone from '../components/sliceZone';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
-const BlogPost = ({title, body}) => {
+const BlogPostWrapper = styled.section`
+  max-width: 800px;
+  min-width: 800px;
+  margin: 40px auto;
+  background: #e9eef0;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+`;
 
-  console.log(title, body);
+const BlogPost = ({title, date, body}) => {
+
+  console.log(title, date, body);
 
   return (
-    <div>
+    <BlogPostWrapper>
 
       <RichText render={title} />
+      <p>{date}</p>
       {
         body &&
         <SliceZone body={body} />
       }
 
-    </div>
+    </BlogPostWrapper>
   )
 };
 
