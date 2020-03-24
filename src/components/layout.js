@@ -35,6 +35,11 @@ const navigationQuery = graphql`
                   uid
                 }
               }
+              ... on PRISMIC_Blog_home {
+                _meta {
+                  uid
+                }
+              }
             }
           }
         }
@@ -110,7 +115,7 @@ const Layout = ({ children }) => {
         <StaticQuery  
           query={`${navigationQuery}`}
           render={(data) => {
-            console.log(data);
+            console.log('data:', data);
             return (
               <>
                 <Branding>

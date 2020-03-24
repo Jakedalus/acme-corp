@@ -8,7 +8,7 @@ import BlogPost from '../components/blogPost';
 export const query = graphql`
 {
   prismic {
-    allBlog_posts {
+    allBlog_posts(first: 1, sortBy: date_DESC) {
       edges {
         node {
           blog_post_title
@@ -37,6 +37,11 @@ export const query = graphql`
           }
           date
         }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
     }
     allBlog_homes {
