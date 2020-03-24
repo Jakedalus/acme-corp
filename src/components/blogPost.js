@@ -7,7 +7,7 @@ const BlogPostWrapper = styled.section`
   max-width: 800px;
   min-width: 800px;
   margin: 40px auto;
-  background: #e9eef0;
+  background: var(--off_white);
   color: black;
   padding: 20px;
   border-radius: 10px;

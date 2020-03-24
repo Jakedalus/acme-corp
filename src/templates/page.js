@@ -49,8 +49,8 @@ const PageWrapper = styled.section`
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background: var(--dark_blue);
-  color: white;
+  background: var(--off_white);
+  color: black;
   border-radius: 10px;
 `;
 

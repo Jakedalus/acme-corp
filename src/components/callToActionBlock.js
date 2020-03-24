@@ -5,7 +5,7 @@ import {Link} from 'gatsby';
 
 const CallToActionBlockWrapper = styled.section`
   padding: 20px;
-  background: var(--dark_red);
+  background: var(--dark_blue);
   color: white;
 
   border-radius: 20px;
@@ -30,7 +30,7 @@ const CallToActionBlockWrapper = styled.section`
 `;
 
 const Button = styled.div`
-  background: var(--dark_blue);
+  background: var(--dark_red);
   display: inline-block;
   border-radius: 4px;
   cursor: pointer;
