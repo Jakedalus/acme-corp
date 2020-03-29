@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {graphql} from 'gatsby';
+import { getCursorFromDocumentIndex } from 'gatsby-source-prismic-graphql';
 import Layout from '../components/layout';
 import styled from 'styled-components';
 import RichText from '../components/richText';
 import BlogPost from '../components/blogPost';
 
 export const query = graphql`
-{
+query BlogQuery($first: Int = 2, $last: Int, $after: String, $before: String){
   prismic {
-    allBlog_posts(first: 1, sortBy: date_DESC) {
+    allBlog_posts(first: $first, last: $last, after: $after, before: $before, sortBy: date_DESC) {
       edges {
         node {
           blog_post_title
@@ -37,8 +38,11 @@ export const query = graphql`
           }
           date
         }
+        cursor
       }
+      totalCount
       pageInfo {
+        startCursor
         endCursor
         hasNextPage
         hasPreviousPage
@@ -55,19 +59,6 @@ export const query = graphql`
     }
   }
 }`;
-
-const ContentWrapper = styled.section`
-  max-width: 800px;
-  margin: 40px auto;
-  background: #e9eef0;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-
-  a {
-    color: var(--yellow);
-  }
-`;
 
 const BlogWrapper = styled.section`
   // background: var(--light_gray);
@@ -107,10 +98,63 @@ const BlogWrapper = styled.section`
 
 `;
 
-const Blog = props => {
 
-  console.log(props);
-  console.log(props.data.prismic.allBlog_posts.edges);
+
+const Blog = props => {
+  const limit = 2;
+  const [page, setPage] = useState(-1);
+  const didMountRef = useRef(false);
+  const [data, setData] = useState(props.data.prismic);
+  // const [cursor, setCursor] = useState(data.allBlog_posts.pageInfo.endCursor);
+
+  console.log('props:', props);
+  console.log('page:', page);
+  console.log('getCursorFromDocumentIndex(page):',getCursorFromDocumentIndex(page));
+  console.log('data:', data);
+  // console.log('--> data.allBlog_posts.edges[0].cursor:', data.allBlog_posts.edges[0].cursor);
+  // console.log('--> data.allBlog_posts.edges[0].node.date:', data.allBlog_posts.edges[0].node.date);
+  // console.log('didMountRef:', didMountRef);
+  console.log('----');
+  // console.log(props.data.prismic.allBlog_posts.edges);
+
+  // const onPreviousClick = () => setCursor(data.allBlog_posts.pageInfo.startCursor);
+  // const onNextClick = () => setCursor(data.allBlog_posts.pageInfo.endCursor);
+
+  const onPreviousClick = () => setPage(page - limit);
+  const onNextClick = () => setPage(page + limit);
+
+  // const handleClickBlogNavigation = (direction) => {
+  //   console.log(direction);
+  //   // const date = data.allBlog_posts.edges[0].node.date;
+  //   // console.log('date:', date);
+  //   const cursor = data.allBlog_posts.pageInfo.endCursor;
+  //   console.log(cursor);
+  //   props.prismic
+  //       .load({ variables: { after: cursor, limit }, query })
+  //       .then(res => {
+  //         console.log('res.data:', res.data);
+  //         return setData(res.data)
+  //       });
+  // };
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+
+    props.prismic
+      .load({ variables: { after: getCursorFromDocumentIndex(page), limit } })
+      .then(res => setData(res.data));
+
+    // props.prismic
+    //     .load({ variables: { after: cursor }, query })
+    //     .then(res => {
+    //       console.log('res.data:', res.data);
+    //       return setData(res.data)
+    //     });
+
+  }, [page]);
 
   return (
     <Layout>
@@ -124,8 +168,9 @@ const Blog = props => {
           </div>
         </div>
         {
-          props.data.prismic.allBlog_posts.edges.map((blog, i) => {
-            console.log('current blog:', blog);
+          // props.data.prismic.allBlog_posts.edges.map((blog, i) => {
+            data.allBlog_posts.edges.map((blog, i) => {
+            // console.log('current blog:', blog);
             return (
             <BlogPost 
               key={i}
@@ -137,6 +182,25 @@ const Blog = props => {
             />
           )})
         }
+        <div>
+          <button
+            // disabled={!data.allBlog_posts.pageInfo.hasPreviousPage}
+            disabled={page <= 0}
+            // onClick={() => props.prismic.load({variables: { limit: 2 }})}
+            // onClick={() => handleClickBlogNavigation('prev')}
+            onClick={onPreviousClick}
+          >
+            Prev
+          </button>
+          <button
+            disabled={!data.allBlog_posts.pageInfo.hasNextPage}
+            // onClick={() => props.prismic.load({variables: { limit: 1 }})}
+            // onClick={() => handleClickBlogNavigation('next')}
+            onClick={onNextClick}
+          >
+            Next
+          </button>
+        </div>
       </BlogWrapper>
     </Layout>
   );

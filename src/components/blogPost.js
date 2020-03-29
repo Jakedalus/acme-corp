@@ -1,6 +1,6 @@
 import React from 'react';
 import RichText from './richText';
-import SliceZone from '../components/sliceZone';
+import SliceZone from './sliceZone';
 import styled from 'styled-components';
 
 const BlogPostWrapper = styled.section`

@@ -15,7 +15,14 @@ module.exports = {
           match: '/:uid',
           path: '/',
           component: require.resolve('./src/templates/page.js')
-        }]
+        }, 
+        // {
+        //   type: 'Post',
+        //   match: '/:uid',
+        //   path: '/blog/',
+        //   component: require.resolve('./src/templates/post.js')
+        // }
+      ]
       }
     },
     `gatsby-plugin-react-helmet`,
