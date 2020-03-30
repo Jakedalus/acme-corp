@@ -16,12 +16,12 @@ module.exports = {
           path: '/',
           component: require.resolve('./src/templates/page.js')
         }, 
-        // {
-        //   type: 'Post',
-        //   match: '/:uid',
-        //   path: '/blog/',
-        //   component: require.resolve('./src/templates/post.js')
-        // }
+        {
+          type: 'Blog_post',
+          match: '/blog/:uid',
+          path: '/blog',
+          component: require.resolve('./src/templates/post.js')
+        }
       ]
       }
     },
