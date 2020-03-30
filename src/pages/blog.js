@@ -12,6 +12,9 @@ query BlogQuery($first: Int = 2, $last: Int, $after: String, $before: String){
     allBlog_posts(first: $first, last: $last, after: $after, before: $before, sortBy: date_DESC) {
       edges {
         node {
+          _meta {
+            uid
+          }
           blog_post_title
           body {
             ... on PRISMIC_Blog_postBodyText {
@@ -170,15 +173,14 @@ const Blog = props => {
         {
           // props.data.prismic.allBlog_posts.edges.map((blog, i) => {
             data.allBlog_posts.edges.map((blog, i) => {
-            // console.log('current blog:', blog);
+            console.log('current blog:', blog);
             return (
             <BlogPost 
               key={i}
               title={blog.node.blog_post_title}
               body={blog.node.body}
               date={blog.node.date}
-              // price={price.price_per_month}
-              // mostPopular={price.price_type === 'Most Popular'}
+              uid={blog.node._meta.uid}
             />
           )})
         }
