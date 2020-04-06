@@ -3,11 +3,15 @@
   --yellow: #f3f998;
   --bright_red: #e81e1e;
   --dark_red: #7d110f;
-  --blue: #255B8A;
+  --blue: #1D476B;
   --dark_blue: #15152d;
   --light_gray: #a89da3;
   --off_white: #e9eef0;
   /* Pallete designed using coolors.co */
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {

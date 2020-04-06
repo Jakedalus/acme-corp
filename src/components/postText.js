@@ -1,6 +1,6 @@
 import React from 'react';
 import RichText from './richText';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 const PostText = ({text}) => {
   console.log(text);
