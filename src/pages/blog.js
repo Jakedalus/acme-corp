@@ -113,7 +113,7 @@ const Blog = props => {
 
   console.log('props:', props);
   console.log('page:', page);
-  console.log('getCursorFromDocumentIndex(page):',getCursorFromDocumentIndex(page));
+  // console.log('getCursorFromDocumentIndex(page):',getCursorFromDocumentIndex(page));
   console.log('data:', data);
   // console.log('--> data.allBlog_posts.edges[0].cursor:', data.allBlog_posts.edges[0].cursor);
   // console.log('--> data.allBlog_posts.edges[0].node.date:', data.allBlog_posts.edges[0].node.date);
