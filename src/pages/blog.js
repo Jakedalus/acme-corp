@@ -76,7 +76,7 @@ const BlogWrapper = styled.section`
   // color: var(--dark_red);
   // color: var(--yellow);
 
-  .blog-header {
+  .blog-home-header {
     background: url('${props => props.backgroundImage}');
     background-size: 100%;
     background-origin: border-box;
@@ -89,11 +89,23 @@ const BlogWrapper = styled.section`
     align-items: center;
     color: white;
 
-    .blog-header-content {
+    .blog-home-header-content {
       width: 800px;
       padding: 20px;
       background: rgba(0,0,0,0.5);
       border-radius: 10px;
+    }
+  }
+
+  .blog-home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+
+    button {
+      cursor: pointer;
     }
   }
 
@@ -142,44 +154,46 @@ const Blog = props => {
       <BlogWrapper
         backgroundImage={props.data.prismic.allBlog_homes.edges[0].node.blog_home_image.url}
       >
-        <div className="blog-header">
-          <div className="blog-header-content">
+        <div className="blog-home-header">
+          <div className="blog-home-header-content">
             <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_title} />
             <RichText render={props.data.prismic.allBlog_homes.edges[0].node.blog_home_description} />
           </div>
         </div>
-        {
-          // props.data.prismic.allBlog_posts.edges.map((blog, i) => {
-            data.allBlog_posts.edges.map((blog, i) => {
-            console.log('current blog:', blog);
-            return (
-            <BlogPost 
-              key={i}
-              title={blog.node.blog_post_title}
-              body={blog.node.body}
-              date={blog.node.date}
-              uid={blog.node._meta.uid}
-            />
-          )})
-        }
-        <div>
-          <button
-            // disabled={!data.allBlog_posts.pageInfo.hasPreviousPage}
-            disabled={page <= 0}
-            // onClick={() => props.prismic.load({variables: { limit: 2 }})}
-            // onClick={() => handleClickBlogNavigation('prev')}
-            onClick={onPreviousClick}
-          >
-            Prev
-          </button>
-          <button
-            disabled={!data.allBlog_posts.pageInfo.hasNextPage}
-            // onClick={() => props.prismic.load({variables: { limit: 1 }})}
-            // onClick={() => handleClickBlogNavigation('next')}
-            onClick={onNextClick}
-          >
-            Next
-          </button>
+        <div className="blog-home-content">
+          {
+            // props.data.prismic.allBlog_posts.edges.map((blog, i) => {
+              data.allBlog_posts.edges.map((blog, i) => {
+              console.log('current blog:', blog);
+              return (
+              <BlogPost 
+                key={i}
+                title={blog.node.blog_post_title}
+                body={blog.node.body}
+                date={blog.node.date}
+                uid={blog.node._meta.uid}
+              />
+            )})
+          }
+          <div>
+            <button
+              // disabled={!data.allBlog_posts.pageInfo.hasPreviousPage}
+              disabled={page <= 0}
+              // onClick={() => props.prismic.load({variables: { limit: 2 }})}
+              // onClick={() => handleClickBlogNavigation('prev')}
+              onClick={onPreviousClick}
+            >
+              Prev
+            </button>
+            <button
+              disabled={!data.allBlog_posts.pageInfo.hasNextPage}
+              // onClick={() => props.prismic.load({variables: { limit: 1 }})}
+              // onClick={() => handleClickBlogNavigation('next')}
+              onClick={onNextClick}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </BlogWrapper>
     </Layout>
