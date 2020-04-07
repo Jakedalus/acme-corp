@@ -90,8 +90,10 @@ const BlogWrapper = styled.section`
     color: white;
 
     .blog-header-content {
-      width: 820px;
+      width: 800px;
       padding: 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
     }
   }
 
@@ -108,7 +110,6 @@ const Blog = props => {
   const [page, setPage] = useState(-1);
   const didMountRef = useRef(false);
   const [data, setData] = useState(props.data.prismic);
-  // const [cursor, setCursor] = useState(data.allBlog_posts.pageInfo.endCursor);
 
   console.log('props:', props);
   console.log('page:', page);
@@ -120,25 +121,9 @@ const Blog = props => {
   console.log('----');
   // console.log(props.data.prismic.allBlog_posts.edges);
 
-  // const onPreviousClick = () => setCursor(data.allBlog_posts.pageInfo.startCursor);
-  // const onNextClick = () => setCursor(data.allBlog_posts.pageInfo.endCursor);
-
   const onPreviousClick = () => setPage(page - limit);
   const onNextClick = () => setPage(page + limit);
 
-  // const handleClickBlogNavigation = (direction) => {
-  //   console.log(direction);
-  //   // const date = data.allBlog_posts.edges[0].node.date;
-  //   // console.log('date:', date);
-  //   const cursor = data.allBlog_posts.pageInfo.endCursor;
-  //   console.log(cursor);
-  //   props.prismic
-  //       .load({ variables: { after: cursor, limit }, query })
-  //       .then(res => {
-  //         console.log('res.data:', res.data);
-  //         return setData(res.data)
-  //       });
-  // };
 
   useEffect(() => {
     if (!didMountRef.current) {
@@ -149,13 +134,6 @@ const Blog = props => {
     props.prismic
       .load({ variables: { after: getCursorFromDocumentIndex(page), limit } })
       .then(res => setData(res.data));
-
-    // props.prismic
-    //     .load({ variables: { after: cursor }, query })
-    //     .then(res => {
-    //       console.log('res.data:', res.data);
-    //       return setData(res.data)
-    //     });
 
   }, [page]);
 

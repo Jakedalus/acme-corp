@@ -17,14 +17,14 @@ const ImageWithCaptionWrapper = styled.figure`
 
   figcaption {
     display: flex;
-    align-items: center;
-    height: 80px;
+    // align-items: center;
+    // height: 80px;
     font-style: italic;
     font-weight: bold; 
     color: var(--blue);
     background: rgba(0,0,0,0.2);
     margin: 0;
-    padding: 5px;
+    padding: 6px 4px;
 
     p {
       margin: 0;
