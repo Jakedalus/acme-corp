@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-remove-console',
     {
       resolve: 'gatsby-source-prismic-graphql',
       options: {
