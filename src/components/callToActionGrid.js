@@ -20,6 +20,7 @@ const CallToActionGrid = ({title, callToActions}) => {
           content={callToAction.content}
           buttonLabel={callToAction.button_label}
           buttonDestination={`/${callToAction.button_destination._meta.uid}`}
+          contentType={callToAction.button_destination._meta.type}
           featuredImage={callToAction.featured_image.url}
         />
       ))}

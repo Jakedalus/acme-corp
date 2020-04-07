@@ -23,6 +23,25 @@ query PageQuery($id: String){
                   ... on PRISMIC_Contact_page {
                     _meta {
                       uid
+                      type
+                    }
+                  }
+                  ... on PRISMIC_Page {
+                    _meta {
+                      uid
+                      type
+                    }
+                  }
+                  ... on PRISMIC_Blog_home {
+                    _meta {
+                      uid
+                      type
+                    }
+                  }
+                  ... on PRISMIC_Blog_post {
+                    _meta {
+                      uid
+                      type
                     }
                   }
                 }

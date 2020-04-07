@@ -48,8 +48,8 @@ const Button = styled.div`
   }
 `;
 
-const CallToActionBlock = ({title, content, buttonLabel, buttonDestination, featuredImage}) => {
-  console.log(title, content, buttonLabel, buttonDestination);
+const CallToActionBlock = ({title, content, buttonLabel, buttonDestination, featuredImage, contentType}) => {
+  console.log(title, content, buttonLabel, buttonDestination, contentType);
   return (
     <CallToActionBlockWrapper>
       <RichText render={title} />
@@ -60,7 +60,7 @@ const CallToActionBlock = ({title, content, buttonLabel, buttonDestination, feat
         </div>
       </div>
       <Button>
-        <Link to={buttonDestination}>
+        <Link to={contentType === 'blog_post' ? `blog/${buttonDestination}` : buttonDestination}>
           {buttonLabel}
         </Link>
       </Button>
