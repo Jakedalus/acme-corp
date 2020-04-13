@@ -181,7 +181,10 @@ const Blog = props => {
 
     props.prismic
       .load({ variables: { after: getCursorFromDocumentIndex(page)  } })
-      .then(res => setData(res.data));
+      .then(res => {
+        console.log('props.prismic.load(), res.data:', res.data);
+        return setData(res.data)
+      });
 
   }, [page]);
 
@@ -198,18 +201,18 @@ const Blog = props => {
         </div>
         <div className="blog-home-content">
           <div className="blog-posts">
-            <TransitionGroup>
+            <TransitionGroup className="blog-posts-list">
             {
                 data.allBlog_posts.edges.map((blog, i) => {
                 console.log('current blog:', blog);
                 return (
                 <CSSTransition
-                  key={i}
+                  key={blog.cursor}  // key must be unique for each NEW blog post on loading data for TransitionGroup to work
                   timeout={500}
                   classNames="item"
                 >
                   <BlogPost 
-                    key={i}
+                    // key={i}
                     title={blog.node.blog_post_title}
                     body={blog.node.body}
                     date={blog.node.date}
