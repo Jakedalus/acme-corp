@@ -21,6 +21,7 @@ module.exports = {
           type: 'Blog_post',
           match: '/blog/:uid',
           path: '/blog',
+          sortBy: 'date_DESC',
           component: require.resolve('./src/templates/post.js')
         }
       ]

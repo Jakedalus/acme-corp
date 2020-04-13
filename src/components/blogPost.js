@@ -3,6 +3,9 @@ import { Link } from 'gatsby';
 import RichText from './richText';
 import SliceZone from './sliceZone';
 import styled from 'styled-components';
+// import { bounce } from 'react-animations';
+
+// const bounceAnimation = keyframes`${bounce}`;
 
 const BlogPostWrapper = styled.section`
   max-width: 800px;
@@ -12,6 +15,7 @@ const BlogPostWrapper = styled.section`
   color: black;
   padding: 20px;
   border-radius: 10px;
+
 
   a {
     text-decoration: none;
@@ -31,19 +35,6 @@ const BlogPostWrapper = styled.section`
       filter: brightness(200%);
     }
   }
-
-  // a:after {
-  //   content: '';
-  //   width: 0px;
-  //   height: 1px;
-  //   display: block;
-  //   background: var(--blue);
-  //   transition: 300ms;
-  // }
-
-  // a:hover:after {
-  //   width: 100%;
-  // }
 `;
 
 const BlogPost = ({title, date, body, uid}) => {

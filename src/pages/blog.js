@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import {graphql} from 'gatsby';
 import { getCursorFromDocumentIndex } from 'gatsby-source-prismic-graphql';
 import Layout from '../components/layout';
@@ -7,7 +8,7 @@ import RichText from '../components/richText';
 import BlogPost from '../components/blogPost';
 
 export const query = graphql`
-query BlogQuery($first: Int = 2, $last: Int, $after: String, $before: String){
+query BlogQuery($first: Int = 3, $last: Int, $after: String, $before: String){
   prismic {
     allBlog_posts(first: $first, last: $last, after: $after, before: $before, sortBy: date_DESC) {
       edges {
@@ -63,6 +64,8 @@ query BlogQuery($first: Int = 2, $last: Int, $after: String, $before: String){
   }
 }`;
 
+
+
 const BlogWrapper = styled.section`
   // background: var(--light_gray);
   // background: #e9eef0;
@@ -75,6 +78,8 @@ const BlogWrapper = styled.section`
   // text-align: center;
   // color: var(--dark_red);
   // color: var(--yellow);
+
+  
 
   .blog-home-header {
     background: url('${props => props.backgroundImage}');
@@ -104,6 +109,10 @@ const BlogWrapper = styled.section`
     width: 800px;
     margin: 0 auto;
 
+    .blog-posts {
+      // animation: .2s ease-in-out .1s fadeInMoveUp backwards;
+    }
+
     button {
       cursor: pointer;
     }
@@ -113,19 +122,46 @@ const BlogWrapper = styled.section`
     height: 50vh;
   }
 
+  // @keyframes fadeInMoveUp {
+  //   0% {
+  //     opacity: 0;
+  //     transform: translateY(60px);
+  //   }
+    
+  //   100% {
+  //     opacity: 1;
+  //     transform: translateY(0);
+  //   }
+  // }
+
+  .item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+
 `;
 
 
 
 const Blog = props => {
-  const limit = 2;
+  const limit = 3;
   const [page, setPage] = useState(-1);
   const didMountRef = useRef(false);
   const [data, setData] = useState(props.data.prismic);
 
   console.log('props:', props);
-  console.log('page:', page);
-  // console.log('getCursorFromDocumentIndex(page):',getCursorFromDocumentIndex(page));
+  console.log('$$ page:', page);
+  console.log('$$ getCursorFromDocumentIndex(page):',getCursorFromDocumentIndex(page));
   console.log('data:', data);
   // console.log('--> data.allBlog_posts.edges[0].cursor:', data.allBlog_posts.edges[0].cursor);
   // console.log('--> data.allBlog_posts.edges[0].node.date:', data.allBlog_posts.edges[0].node.date);
@@ -144,7 +180,7 @@ const Blog = props => {
     }
 
     props.prismic
-      .load({ variables: { after: getCursorFromDocumentIndex(page), limit } })
+      .load({ variables: { after: getCursorFromDocumentIndex(page)  } })
       .then(res => setData(res.data));
 
   }, [page]);
@@ -161,20 +197,29 @@ const Blog = props => {
           </div>
         </div>
         <div className="blog-home-content">
-          {
-            // props.data.prismic.allBlog_posts.edges.map((blog, i) => {
-              data.allBlog_posts.edges.map((blog, i) => {
-              console.log('current blog:', blog);
-              return (
-              <BlogPost 
-                key={i}
-                title={blog.node.blog_post_title}
-                body={blog.node.body}
-                date={blog.node.date}
-                uid={blog.node._meta.uid}
-              />
-            )})
-          }
+          <div className="blog-posts">
+            <TransitionGroup>
+            {
+                data.allBlog_posts.edges.map((blog, i) => {
+                console.log('current blog:', blog);
+                return (
+                <CSSTransition
+                  key={i}
+                  timeout={500}
+                  classNames="item"
+                >
+                  <BlogPost 
+                    key={i}
+                    title={blog.node.blog_post_title}
+                    body={blog.node.body}
+                    date={blog.node.date}
+                    uid={blog.node._meta.uid}
+                  />
+                </CSSTransition>
+              )})
+            }
+            </TransitionGroup>
+          </div>
           <div>
             <button
               // disabled={!data.allBlog_posts.pageInfo.hasPreviousPage}
